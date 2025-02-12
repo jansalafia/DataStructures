@@ -41,6 +41,7 @@ public class StackArray<E> implements Stack<E> {
 
 		top++;
 		elements[top] = element;
+		
 
 	}
 
