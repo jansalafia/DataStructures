@@ -9,26 +9,24 @@ public class ListImpl<T extends Comparable<T>> implements List<T> {
 	}
 
 	// insert adds a node into the list in key order
-	public boolean insert(T key) {
-		// TODO if list is empty, create a new ListNode with key and null as parameters
-		// set head to that new node and return true
-		// List has at least one element
-		// CALL search and get the prev reference
-		ListNode<T> prev = search(key);
-		// TODO if prev != null, we have a prev node, and we will insert after it
-		// create a local reference, nextOfPrev, to the node that the prev node points
-		// to // create new ListNode with key and nextOfPrev as parameters
-		// sent the next of the prev node to the new node
-		if (prev != null) {
-			// we insert after the prev node
-		}
-		// TODO create a new ListNode with key and head as parameters // set head to the
-		// new node
-		else {
-			// we insert a new first node
-		}
-		return true;
-	}
+        @Override
+    public boolean insert(T key) {
+        if (head == null) {
+            head = new ListNode<>(key, null);
+            return true;
+        }
+
+        ListNode<T> prev = search(key);
+        
+        if (prev != null) {
+            ListNode<T> nextOfPrev = prev.getNext();
+            prev.setNext(new ListNode<>(key, nextOfPrev));
+        } else {
+            head = new ListNode<>(key, head);
+        }
+        
+        return true;
+    }
 
 	// Search is looking for value Key in the list
 	// It will return the pointer to the previous node where key is (or should be)
@@ -47,38 +45,61 @@ public class ListImpl<T extends Comparable<T>> implements List<T> {
 		return prev;
 	} // search
 
+        @Override
 	public boolean remove(T key) {
-		ListNode<T> prev = search(key);
-		// TODO if head is null you can return false (nothing in the list)
-		if (prev == null) // potentially removing 1st node
-		{
 
-			// TODO if head is null you can return false (nothing in the list)
-			if (head == null)
-				return false;
+		ListNode<T> prev = search(key);
+
+		if (head == null) {
+			return false;
 		}
-		// TODO
-		// if head.data is same as key
-		// set head to head next
-		// return true
-		// else return false – no match
-		else { // prev != null
-				// TODO
-				// if prev next is null
-				// there is nothing to remove
-				// return false
-				// TODO
-				// if prev next data matches the key
-				// create local reference del to the prev next node
-				// set prev next to the del next reference to bypass the node // return true
-				// TODO
-				// else return false
+
+		if (head.getData().equals(key)) {
+			head = head.getNext();
+			return true;
 		}
-		return false; // remove
+
+		if (prev == null) {
+			return false;
+		}
+		
+		if (prev.getNext() == null) {
+			return false;
+		}
+
+		if (prev.getNext().getData().equals(key)) {
+
+			ListNode<T> toDelete = prev.getNext();
+			prev.setNext(toDelete.getNext());
+
+			return true;
+
+		}
+
+		return false;
+
 	}
 
 	// TODO
 	// displays prints the list content in [ ]'s separated by commas
+
+        @Override
 	public void display() {
-	} // display()
+
+		ListNode<T> curr = head;
+
+		System.out.print("[");
+
+		while (curr != null) {
+			System.out.print(curr.getData());
+			curr = curr.getNext();
+
+			if (curr != null) {
+				System.out.print(", ");
+			}
+		}
+
+		System.out.println("]");
+
+	}
 } // end of the class
