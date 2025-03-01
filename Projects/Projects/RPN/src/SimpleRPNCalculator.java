@@ -1,4 +1,4 @@
-package template;
+
 
 public interface SimpleRPNCalculator {
 	public String calculate(String inputString);

@@ -1,4 +1,4 @@
-package template;
+
 
 public class YourStackNode {
 	// DO NOT CHANGE THIS!

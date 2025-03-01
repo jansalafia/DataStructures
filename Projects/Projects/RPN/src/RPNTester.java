@@ -1,4 +1,4 @@
-package template;
+
 
 import java.util.ArrayList;
 
@@ -25,7 +25,7 @@ public class RPNTester {
 		testExpressions.add("11 bv +"); // bad token
 		testExpressions.add("2 3 + -"); // underflow on an operator
 		testExpressions.add("2 3 + 4 5 -"); // leftover tokens
-		// YOU SHOULD ADD MORE TEST CASES!
+		testExpressions.add("1 0 /"); // division by zero
 		
 		for (String s : testExpressions) {
 			System.out.println(calc.calculate(s));
