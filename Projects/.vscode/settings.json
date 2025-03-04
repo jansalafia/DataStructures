@@ -1,10 +1,10 @@
 {
     "java.project.sourcePaths": [
-        "Projects/RPN/src/template",
+        "Projects/RPN/src",
         "Homework/Homework3/src/HW3",
         "Homework/Homework3/src",
         "Homework/Homework2/src",
         "Examples/src",
-        "Projects/RPN/src"
+        "Homework/Homework4/src"
     ]
 }
