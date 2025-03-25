@@ -2,12 +2,14 @@
     "java.project.sourcePaths": [
         "Projects/convertBinaryRecurseively/src",
         "Projects/RPN/src",
+        "Homework/Homework7/src/main",
+        "Homework/Homework6/src",
         "Homework/Homework5/src",
         "Homework/Homework4/src",
         "Homework/Homework3/src/HW3",
         "Homework/Homework3/src",
         "Homework/Homework2/src",
         "Examples/src",
-        "Homework/Homework6/src"
+        "Homework/Homework7/src"
     ]
 }
