@@ -32,12 +32,12 @@ public class App {
         // Count number of employees with popular first names
         whimsicalToysEmployeeReporter.countNumberOfEmployeesWithPopularFirstName();
 
-        // Add employees to the waiting list for lacrosse tickets
+        // Add employees to the waiting list for  tickets
         whimsicalToysEmployeeReporter.addToWaitingList("John Robertson");
         whimsicalToysEmployeeReporter.addToWaitingList("John Nagy");
         whimsicalToysEmployeeReporter.addToWaitingList("Rob Shagglebury");
 
-        // Display the waiting list for lacrosse tickets
+        // Display the waiting list for tickets
         whimsicalToysEmployeeReporter.displayWaitingListForTickets();
     }
 }
