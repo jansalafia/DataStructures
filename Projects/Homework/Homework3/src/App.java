@@ -2,7 +2,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
- 
+
 
 /**
  * App to create & test method to find the maximal element in a range of a list. 

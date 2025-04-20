@@ -1,7 +1,9 @@
 {
     "java.project.sourcePaths": [
         "Projects/convertBinaryRecurseively/src",
+        "Projects/TreeProject",
         "Projects/RPN/src",
+        "Homework/Homework9",
         "Homework/Homework8",
         "Homework/Homework7/src/main",
         "Homework/Homework7/src",
@@ -11,8 +13,16 @@
         "Homework/Homework3/src/HW3",
         "Homework/Homework3/src",
         "Homework/Homework2/src",
+        "Homework/Homework10",
         "Examples/src",
         "Classwork/Week4",
-        "Projects/TreeProject"
-    ]
+        "Projects/graphLab"
+    ],
+    "github.copilot.enable": {
+        "*": true,
+        "plaintext": false,
+        "markdown": false,
+        "scminput": false,
+        "java": true
+    }
 }

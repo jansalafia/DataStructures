@@ -104,6 +104,7 @@ public class driver1 {
 
 		tree3.remove(6);
 		tree3.inOrder();
+
 		
 		
 		/*  ------------------------ Program Output ------------------------
@@ -146,6 +147,9 @@ public class driver1 {
 			
 		tree4.remove(6);
 		tree4.inOrder();
+
+
+		
 	}
 
 }

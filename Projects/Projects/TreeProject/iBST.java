@@ -12,4 +12,6 @@ public interface iBST<T extends Comparable<T>> {
 
 	public boolean remove(T key);
 
+	public boolean searchForKey(T key);
+
 }
