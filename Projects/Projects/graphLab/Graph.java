@@ -1,12 +1,9 @@
-
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
-import java.util.Set;
 
 public class Graph {
 
@@ -15,13 +12,13 @@ public class Graph {
 	public Boolean addNode(GraphNode node) {
 		// if it doesn't exist in the of nodes already, the graph, create it
 		if (getNode(node.getValue()) == null) {
-			nodeList.add(node); 																//add the node to the list of nodes
+			nodeList.add(node); 															//add the node to the list of nodes
 			System.out.println("Node " + node.getValue() + " added to the graph.");
-			return true; 																		//return true, we added a node
+			return true; 																	//return true, we added a node
 		}
 		
 		else if(getNode(node.getValue()) != null) {
-			return false; 																		//return false, we did not add a node
+			return false; 																	//return false, we did not add a node
 		}
 
 		// --> a node has been supplied, add it to the nodeList ( the graph!)
@@ -32,28 +29,29 @@ public class Graph {
 	}
 
 	public Boolean addEdge(GraphNode fromNode, GraphNode toNode, Integer weight) {
-		//get the source and target nodes from the existing graph
-		
-		GraphNode sourceNode = getNode(fromNode.getValue()); 								//get the source node from the graph
-		GraphNode targetNode = getNode(toNode.getValue()); 									//get the target node from the graph
-		//if either dont exist, cant make the edge
-		if (sourceNode == null) { 															//if either node is null, return false
+		GraphNode sourceNode = getNode(fromNode.getValue());
+		GraphNode targetNode = getNode(toNode.getValue());
+
+		if (sourceNode == null) {
 			System.out.println("The source node does not exist in the graph. Please add it first.");
-			return false; 																	//return false
-		}
-		else if (targetNode == null) { 														//if either node is null, return false
+			return false;
+		} 
+		
+		else if (targetNode == null) {
 			System.out.println("The target node does not exist in the graph. Please add it first.");
-			return false; 																	//return false
-		}
+			return false;
+		} 
 		
 		else {
-			//if the source node exists, and the target node exists, add the edge
-			if (sourceNode.addNeighbor(targetNode, weight)) { 								//if the source node can add the target node as a neighbor
-				System.out.println("Edge from " + sourceNode.getValue() + " to " + targetNode.getValue() + " added with weight " + weight);
-				return true; 																//return true, we added an edge
+			boolean addedEdge = sourceNode.addNeighbor(targetNode, weight);
+			boolean addedReverseEdge = targetNode.addNeighbor(sourceNode, weight); 
+
+			if (addedEdge || addedReverseEdge) {
+				System.out.println("Edge between " + sourceNode.getValue() + " and " + targetNode.getValue() + " added with weight " + weight);
+				return true;
 			} else {
-				System.out.println("Edge from " + sourceNode.getValue() + " to " + targetNode.getValue() + " already exists.");
-				return false; 																//return false, we did not add an edge
+				System.out.println("Edge between " + sourceNode.getValue() + " and " + targetNode.getValue() + " already exists.");
+				return false;
 			}
 		}
 	}
@@ -70,12 +68,43 @@ public class Graph {
 	 * there in N and N+1 hops, N + X will be the smallest number of hops
 	 * 
 	 */
+	
 	public int fewestHops(GraphNode fromNode, GraphNode toNode) {
-		//TODO
-		
-		return -1;
+        if (fromNode == null || toNode == null) { 											//if either node is null, return -1
+            System.out.println("One or both of the nodes are null."); 					//print error message
+            return -1; 																		//return -1, invalid input
+        }
 
-	}
+        if (fromNode.equals(toNode)) { 														//if the nodes are the same
+            return 0; 																		//return 0, no hops needed
+        }
+
+        Queue<GraphNode> queue = new LinkedList<>(); 										//queue for BFS
+        Map<GraphNode, Integer> distanceMap = new HashMap<>(); 								//map to track distances from the start node
+
+        queue.add(fromNode); 																//add the start node to the queue
+        distanceMap.put(fromNode, 0); 												//start node is 0 hops away
+
+        while (!queue.isEmpty()) { 															//while there are nodes to process
+            GraphNode currentNode = queue.poll(); 											//get the next node from the queue
+            int currentDistance = distanceMap.get(currentNode); 							//get the distance of the current node
+
+            for (GraphNode neighbor : currentNode.getNeighbors()) { 						//iterate through neighbors
+                System.out.println("Processing neighbor: " + neighbor.getValue());
+                if (!distanceMap.containsKey(neighbor)) { 									//if the neighbor hasn't been visited
+                    distanceMap.put(neighbor, currentDistance + 1); 						//update the distance for the neighbor
+                    queue.add(neighbor); 													//add the neighbor to the queue
+
+                    if (neighbor.equals(toNode)) { 											//if we found the target node
+                        return currentDistance + 1; 										//return the distance to the target node
+                    }
+                }
+            }
+        }
+
+        System.out.println("No path exists between the nodes."); 							//print message if no path exists
+        return -1; 																			//return -1, no path found
+    }
 
 	public GraphNode getNode(String nodeValue) {
 		for (GraphNode thisNode : nodeList) {
